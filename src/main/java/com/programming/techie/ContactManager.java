@@ -18,7 +18,6 @@ public class ContactManager {
     public Collection<Contact> getAllContacts() {
         return contactList.values();
     }
-
     private void checkIfContactAlreadyExist(Contact contact) {
         if (contactList.containsKey(generateKey(contact)))
             throw new RuntimeException("Contact Already Exists");
