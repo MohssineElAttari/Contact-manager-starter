@@ -1,14 +1,12 @@
 package com.programming.techie;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ContactManagerTest {
     private static ContactManager contactManager;
+
     @BeforeAll
     public static void setupAll() {
         System.out.println("Should Print Before All Tests");
@@ -19,6 +17,7 @@ class ContactManagerTest {
         System.out.println("Instantiating Contact Manager");
         contactManager = new ContactManager();
     }
+
     @Test
     @DisplayName("Should Create Contact")
     public void showldCreateContact(){
@@ -51,5 +50,13 @@ class ContactManagerTest {
             contactManager.addContact("John", "Doe", null);
         });
     }
+    @AfterEach
+    public void tearDown() {
+        System.out.println("Should Execute After Each Test");
+    }
 
+    @AfterAll
+    public static void tearDownAll() {
+        System.out.println("Should be executed at the end of the Test");
+    }
 }
