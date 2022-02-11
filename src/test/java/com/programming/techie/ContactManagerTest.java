@@ -3,6 +3,8 @@ package com.programming.techie;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -91,5 +93,12 @@ class ContactManagerTest {
         assertFalse(contactManager.getAllContacts().isEmpty());
         assertEquals(1, contactManager.getAllContacts().size());
     }
-
+    @DisplayName("Phone Number should match the required Format")
+    @ParameterizedTest
+    @ValueSource(strings = {"0123456789", "1234567890", "0123456789"})
+    public void shouldTestPhoneNumberFormat(String phoneNumber) {
+        contactManager.addContact("John", "Doe", phoneNumber);
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
 }
