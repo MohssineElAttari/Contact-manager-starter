@@ -1,6 +1,7 @@
 package com.programming.techie;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,9 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class ContactManagerTest {
     private static ContactManager contactManager;
     @BeforeAll
-    public static void setup() {
+    public static void setupAll() {
+        System.out.println("Should Print Before All Tests");
+    }
 
-        System.out.println("Instantiating Contact Manager before the Test Execution");
+    @BeforeEach
+    public void setup() {
+        System.out.println("Instantiating Contact Manager");
         contactManager = new ContactManager();
     }
     @Test
