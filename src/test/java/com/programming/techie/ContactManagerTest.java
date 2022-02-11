@@ -72,5 +72,20 @@ class ContactManagerTest {
         assertFalse(contactManager.getAllContacts().isEmpty());
         assertEquals(1, contactManager.getAllContacts().size());
     }
+    @Test
+    @DisplayName("Test Contact Creation on Developer Machine")
+    public void shouldTestContactCreationOnDEV() {
+        Assumptions.assumeTrue("DEV".equals(System.getProperty("ENV")));
+        contactManager.addContact("John", "Doe", "0123456789");
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
+    @DisplayName("Repeat Contact Creation Test 5 Times")
+    @RepeatedTest(5)
+    public void shouldTestContactCreationRepeatedly() {
+        contactManager.addContact("John", "Doe", "0123456789");
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
 
 }
