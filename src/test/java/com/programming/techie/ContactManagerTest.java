@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -117,5 +118,14 @@ class ContactManagerTest {
 
     private List<String> phoneNumberList() {
         return Arrays.asList("0123456789", "0123456789", "0123456789");
+    }
+
+    @DisplayName("CSV Source Case - Phone Number should match the required Format")
+    @ParameterizedTest
+    @CsvSource({"0123456789", "0123456789","0123456789"})
+    public void shouldTestPhoneNumberFormatUsingCSVSource(String phoneNumber) {
+        contactManager.addContact("John", "Doe", phoneNumber);
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
     }
 }
