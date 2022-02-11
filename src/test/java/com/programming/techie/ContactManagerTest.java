@@ -1,14 +1,17 @@
 package com.programming.techie;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ContactManagerTest {
     private static ContactManager contactManager;
 
     @BeforeAll
-    public static void setupAll() {
+    public void setupAll() {
         System.out.println("Should Print Before All Tests");
     }
 
@@ -56,7 +59,18 @@ class ContactManagerTest {
     }
 
     @AfterAll
-    public static void tearDownAll() {
+    public void tearDownAll() {
         System.out.println("Should be executed at the end of the Test");
     }
+
+
+    @Test
+    @DisplayName("Should Create Contact")
+    @EnabledOnOs(value = OS.MAC, disabledReason = "Should Run only on MAC")
+    public void shouldCreateContact() {
+        contactManager.addContact("John", "Doe", "0123456789");
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
+
 }
